@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  reverseproxy:
+    build: ./nginx-proxy
+    ports:
+      - 8080:8080
+    restart: always
+
+  mattihew-server:
+    depends_on:
+      - reverseproxy
+    build: ./mattihew
+    restart: always
