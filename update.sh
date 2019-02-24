@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-if [[ `git status --porcelain` ]]; then
+git fetch
+if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
   docker-compose down
+  docker image prune -f
   git pull
-  docker-compose up - --build
+  docker-compose up -d --build
 fi
