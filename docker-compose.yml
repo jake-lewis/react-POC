@@ -3,12 +3,23 @@ version: '3'
 services:
   reverseproxy:
     build: ./nginx-proxy
+    depends_on:
+      - certbot
     ports:
       - 8080:8080
+      - 8443:8443
     restart: always
+    volumes:
+      - ./certbot/www:/www/certbot
+      - ./certbot/conf/:/etc/letsencrypt/
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/www:/www/certbot
+      - ./certbot/conf/:/etc/letsencrypt/
+    command: ["renew"]
 
   mattihew-server:
-    depends_on:
-      - reverseproxy
     build: ./mattihew
     restart: always
