@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PATH=/usr/local/bin:$PATH
 RUNNING=`docker-compose top`
 if [[ "$RUNNING" != "" ]]; then
 docker-compose down
