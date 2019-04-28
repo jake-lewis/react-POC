@@ -27,7 +27,13 @@ module.exports = function(env, argv) {
             ]
         },
         devServer: {
-            contentBase: './dist'
+            port: 3000,
+            contentBase: './dist',
+            inline: false,
+            overlay: {
+                warning: true,
+                errors: true
+            }
         },
         mode: 'development'
     };
