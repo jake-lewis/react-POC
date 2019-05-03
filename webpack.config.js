@@ -4,9 +4,11 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = function(env, argv) {
     const base = {
-        entry: './src/server/server.ts',
+        entry: {
+            index: './src/clientEntry.tsx'
+        },
         output: {
-            filename: 'js/server.js',
+            filename: 'js/[name].[contentHash:8].js',
             path: path.resolve(process.cwd(), 'dist'),
             publicPath:'/'
         },
@@ -23,6 +25,10 @@ module.exports = function(env, argv) {
                             loader: 'awesome-typescript-loader'
                         }
                     ]
+                },
+                {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader']
                 }
             ]
         },
@@ -40,12 +46,12 @@ module.exports = function(env, argv) {
 
     if (env.platform === 'server') {
         base.target = 'node';
+        base.entry = './src/server/server.ts';
+        base.output.filename = 'js/server.js';
     }
     else if (env.platform === 'web') {
-        base.entry = './src/clientEntry.tsx';
         base.output.filename = 'js/client.[contentHash:8].js';
         base.optimization = {
-            runtimeChunk: 'single',
             splitChunks: {
                 cacheGroups: {
                     vendor: {
