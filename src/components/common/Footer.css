@@ -1,0 +1,16 @@
+.circle {
+  background: inherit;
+  width: 15vmin;
+  height: 15vmin;
+  border-radius: 50%;
+  position: fixed;
+  left: calc(50vw - (15vmin / 2));
+  bottom: calc(0vh - (15vmin / 5));
+
+}
+
+.circle img {
+  object-fit: contain;
+  width: 90%;
+  height: 90%;
+}
