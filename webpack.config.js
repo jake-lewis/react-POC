@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = function(env, argv) {
     const base = {
@@ -67,7 +68,11 @@ module.exports = function(env, argv) {
                 template: './public/index.html',
                 alwaysWriteToDisk: true
             }),
-            new HtmlWebpackHarddiskPlugin()
+            new HtmlWebpackHarddiskPlugin(),
+            new WorkboxPlugin.GenerateSW({
+                clientsClaim: true,
+                skipWaiting: true
+            })
         ];
     }
 
