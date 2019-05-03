@@ -7,7 +7,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 module.exports = function(env, argv) {
     const base = {
         entry: {
-            index: './src/clientEntry.tsx'
+            home: './src/homeEntry.tsx'
         },
         output: {
             filename: 'js/[name].[contentHash:8].js',
@@ -43,17 +43,8 @@ module.exports = function(env, argv) {
                 errors: true
             }
         },
-        mode: 'development'
-    };
-
-    if (env.platform === 'server') {
-        base.target = 'node';
-        base.entry = './src/server/server.ts';
-        base.output.filename = 'js/server.js';
-    }
-    else if (env.platform === 'web') {
-        base.output.filename = 'js/client.[contentHash:8].js';
-        base.optimization = {
+        mode: 'development',
+        optimization: {
             splitChunks: {
                 cacheGroups: {
                     vendor: {
@@ -63,8 +54,8 @@ module.exports = function(env, argv) {
                     }
                 }
             }
-        };
-        base.plugins = [
+        },
+        plugins: [
             new HtmlWebpackPlugin({
                 template: './public/index.html',
                 alwaysWriteToDisk: true
@@ -87,8 +78,8 @@ module.exports = function(env, argv) {
                   }
                 ]
               })
-        ];
-    }
+        ]
+    };
 
     return base;
 };
