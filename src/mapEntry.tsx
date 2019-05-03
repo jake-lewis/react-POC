@@ -3,9 +3,9 @@ import * as ReactDOM from 'react-dom';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import Home from './components/home/Home'
+import Map from './components/map/Map';
 
-ReactDOM.render(<Home />, document.getElementById("demo"));
+ReactDOM.render(<Map />, document.getElementById("demo"));
 
 //registerServiceWorker();
 if ('serviceWorker' in navigator) {

@@ -5,7 +5,7 @@ import Footer from './Footer';
 export interface PageProps {
   title: string,
   tagline: string,
-  children: React.ReactChild[]
+  children: JSX.Element[] | JSX.Element
 }
 
 export default (props: PageProps) => {

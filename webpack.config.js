@@ -7,7 +7,8 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 module.exports = function(env, argv) {
     const base = {
         entry: {
-            home: './src/homeEntry.tsx'
+            home: './src/homeEntry.tsx',
+            map: './src/mapEntry.tsx'
         },
         output: {
             filename: 'js/[name].[contentHash:8].js',
@@ -57,8 +58,16 @@ module.exports = function(env, argv) {
         },
         plugins: [
             new HtmlWebpackPlugin({
+                filename: 'index.html',
                 template: './public/index.html',
-                alwaysWriteToDisk: true
+                alwaysWriteToDisk: true,
+                chunks: ['home', 'vendors']
+            }),
+            new HtmlWebpackPlugin({
+                filename: 'map.html',
+                template: './public/index.html',
+                alwaysWriteToDisk: true,
+                chunks: ['map', 'vendors']
             }),
             new HtmlWebpackHarddiskPlugin(),
             new GenerateSW({
