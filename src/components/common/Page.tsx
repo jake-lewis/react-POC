@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Page.css'
 import Header from './Header';
 import Footer from './Footer';
 
