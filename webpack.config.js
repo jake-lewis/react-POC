@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const {GenerateSW} = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 module.exports = function(env, argv) {
     const base = {
@@ -69,10 +70,23 @@ module.exports = function(env, argv) {
                 alwaysWriteToDisk: true
             }),
             new HtmlWebpackHarddiskPlugin(),
-            new WorkboxPlugin.GenerateSW({
+            new GenerateSW({
                 clientsClaim: true,
                 skipWaiting: true
-            })
+            }),
+            new WebpackPwaManifest({
+                name: 'Project Shade',
+                short_name: 'Shade',
+                description: 'My awesome Progressive Web App!',
+                background_color: '#ffffff',
+                crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+                icons: [
+                  {
+                    src: path.resolve('src/assets/rsg_logo.png'),
+                    sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+                  }
+                ]
+              })
         ];
     }
 
