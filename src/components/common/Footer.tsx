@@ -6,7 +6,7 @@ export default () => {
   return (
     <footer>
       <div className="circle">
-        <a href="/index">
+        <a href="/">
           <img src={logo} />
         </a>
       </div>
