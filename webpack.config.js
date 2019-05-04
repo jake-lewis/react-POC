@@ -1,10 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const {GenerateSW} = require('workbox-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 
-module.exports = function(env, argv) {
+module.exports = function (env, argv) {
     const base = {
         entry: {
             home: './src/homeEntry.tsx',
@@ -13,7 +13,7 @@ module.exports = function(env, argv) {
         output: {
             filename: 'js/[name].[contentHash:8].js',
             path: path.resolve(process.cwd(), 'dist'),
-            publicPath:'/'
+            publicPath: '/'
         },
         devtool: 'eval-source-map',
         resolve: {
@@ -32,6 +32,12 @@ module.exports = function(env, argv) {
                 {
                     test: /\.css$/,
                     use: ['style-loader', 'css-loader']
+                },
+                {
+                    test: /\.(png|svg|jpe?g|gif)$/,
+                    use: [
+                        'file-loader'
+                    ]
                 }
             ]
         },
@@ -61,7 +67,8 @@ module.exports = function(env, argv) {
                 filename: 'index.html',
                 template: './public/index.html',
                 alwaysWriteToDisk: true,
-                chunks: ['home', 'vendors']
+                chunks: ['home', 'vendors'],
+                favicon: "./src/images/rsg_logo.png"
             }),
             new HtmlWebpackPlugin({
                 filename: 'map.html',
@@ -81,12 +88,12 @@ module.exports = function(env, argv) {
                 background_color: '#ffffff',
                 crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
                 icons: [
-                  {
-                    src: path.resolve('src/assets/rsg_logo.png'),
-                    sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
-                  }
+                    {
+                        src: path.resolve('src/images/rsg_logo.png'),
+                        sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+                    }
                 ]
-              })
+            })
         ]
     };
 
