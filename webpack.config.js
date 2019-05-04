@@ -36,13 +36,25 @@ module.exports = function (env, argv) {
                 {
                     test: /\.(png|svg|jpe?g|gif)$/,
                     use: [
-                        'file-loader'
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                outputPath: 'images'
+                            }
+                        }
+
                     ]
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|otf)$/,
                     use: [
-                    'file-loader'
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                outputPath: 'fonts'
+                            }
+                        }
+
                     ]
                 }
             ]
@@ -74,14 +86,17 @@ module.exports = function (env, argv) {
                 template: './public/index.html',
                 alwaysWriteToDisk: true,
                 chunks: ['home', 'vendors'],
-                favicon: "./src/images/rsg_logo.png"
+                favicon: "./src/images/rsg_logo.png",
+                meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
+
             }),
             new HtmlWebpackPlugin({
                 filename: 'map.html',
                 template: './public/index.html',
                 alwaysWriteToDisk: true,
                 chunks: ['map', 'vendors'],
-                favicon: "./src/images/rsg_logo.png"
+                favicon: "./src/images/rsg_logo.png",
+                meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
             }),
             new HtmlWebpackHarddiskPlugin(),
             new GenerateSW({
@@ -97,7 +112,8 @@ module.exports = function (env, argv) {
                 icons: [
                     {
                         src: path.resolve('src/images/rsg_logo.png'),
-                        sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+                        sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+                        destination: 'icons'
                     }
                 ]
             })
