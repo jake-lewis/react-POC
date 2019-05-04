@@ -50,11 +50,11 @@ module.exports = function (env, argv) {
         devServer: {
             port: 3000,
             contentBase: './dist',
-            inline: false,
-            overlay: {
-                warning: true,
-                errors: true
-            }
+            //inline: false,
+            // overlay: {
+            //     warning: true,
+            //     errors: true
+            // }
         },
         mode: 'development',
         optimization: {
@@ -80,7 +80,8 @@ module.exports = function (env, argv) {
                 filename: 'map.html',
                 template: './public/index.html',
                 alwaysWriteToDisk: true,
-                chunks: ['map', 'vendors']
+                chunks: ['map', 'vendors'],
+                favicon: "./src/images/rsg_logo.png"
             }),
             new HtmlWebpackHarddiskPlugin(),
             new GenerateSW({

@@ -7,7 +7,6 @@ import Home from './components/home/Home'
 
 ReactDOM.render(<Home />, document.getElementById("demo"));
 
-//registerServiceWorker();
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js').then(registration => {
