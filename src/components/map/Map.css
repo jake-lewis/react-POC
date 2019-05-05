@@ -3,12 +3,6 @@
   grid-row: 1;
 }
 
-.map {
-  height: 100%;
-  width: auto;
-  background-image: url("../../images/metrunui.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
-  filter: drop-shadow(0 0 30px black);
+#map.leaflet-container {
+  background-color: black !important;
 }
