@@ -1,10 +1,20 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const { GenerateSW } = require('workbox-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest')
+const {GenerateSW} = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
-module.exports = function (env, argv) {
+/**
+ * Generates a webpack config Object
+ *
+ * @param {{NODE_ENV: string}} env
+ * @param argv
+ * @returns webpack config
+ */
+module.exports = function (env, argv)
+{
+    const NODE_ENV = env.NODE_ENV || 'production';
     const base = {
         entry: {
             home: './src/homeEntry.tsx',
@@ -67,8 +77,11 @@ module.exports = function (env, argv) {
             //     warning: true,
             //     errors: true
             // }
+            staticOptions: {
+                extensions: ['html']
+            }
         },
-        mode: 'development',
+        mode: NODE_ENV,
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -116,6 +129,10 @@ module.exports = function (env, argv) {
                         destination: 'icons'
                     }
                 ]
+            }),
+            new webpack.DefinePlugin({
+                "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
+                "process.env.PUBLIC_URL": JSON.stringify('')
             })
         ]
     };
