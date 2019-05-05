@@ -4,7 +4,7 @@ import NavButton from '../common/NavButton';
 
 export default () => {
   return (
-    <Page title='PROJECT GHOST' tagline='A Digital Enhancement for Doronai Nui'>
+    <Page title='PROJECT SHADE' tagline='A Digital "Enhancement" for Doronai Nui'>
       <NavButton text='AKUTANA' href='/map' />
       <NavButton text='THE CANISTER' href='/canister' />
       <NavButton text="CHRONICLER'S NOTES" href='/notes' />

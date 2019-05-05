@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Map from './components/map/Map';
+import MapPage from './components/map/MapPage';
 
-ReactDOM.render(<Map />, document.getElementById("demo"));
+ReactDOM.render(<MapPage />, document.getElementById("demo"));
 
 //registerServiceWorker();
 if ('serviceWorker' in navigator) {

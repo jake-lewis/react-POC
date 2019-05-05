@@ -13,7 +13,9 @@ export default (props: PageProps) => {
   return (
     <div>
       <Header title={props.title} tagline={props.tagline} />
-      {props.children}
+      <div className="content">
+        {props.children}
+      </div>
       <Footer />
     </div>
   );
