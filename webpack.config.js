@@ -49,7 +49,8 @@ module.exports = function (env, argv)
                         {
                             loader: 'file-loader',
                             options: {
-                                outputPath: 'images'
+                                outputPath: 'images',
+                                name: '[name].[hash:8].[ext]'
                             }
                         }
 
@@ -61,7 +62,8 @@ module.exports = function (env, argv)
                         {
                             loader: 'file-loader',
                             options: {
-                                outputPath: 'fonts'
+                                outputPath: 'fonts',
+                                name: '[name].[hash:8].[ext]'
                             }
                         }
 
@@ -117,6 +119,7 @@ module.exports = function (env, argv)
                 skipWaiting: true
             }),
             new WebpackPwaManifest({
+                filename: '[name].[hash:8].[ext]',
                 name: 'Project Shade',
                 short_name: 'Shade',
                 description: 'My awesome Progressive Web App!',
