@@ -26,6 +26,9 @@ module.exports = function (env, argv)
             publicPath: '/'
         },
         devtool: 'eval-source-map',
+        node: {
+            fs: 'empty'
+        },
         resolve: {
             extensions: ['.ts', ".tsx", ".js", ".jsx", ".json"]
         },
