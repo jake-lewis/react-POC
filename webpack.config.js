@@ -123,6 +123,7 @@ module.exports = function (env, argv)
                 name: 'Project Shade',
                 short_name: 'Shade',
                 description: 'My awesome Progressive Web App!',
+                theme_color: '#000',
                 background_color: '#000',
                 crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
                 icons: [
