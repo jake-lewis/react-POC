@@ -15,3 +15,11 @@
 #map img.leaflet-image-layer {
   filter: drop-shadow(0 0 20px black);
 }
+
+#map .leaflet-marker-icon {
+  filter: drop-shadow(0 0 5px red);
+}
+
+#map .leaflet-marker-icon:hover {
+  filter: drop-shadow(0 0 5px white);
+}

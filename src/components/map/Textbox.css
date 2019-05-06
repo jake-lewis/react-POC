@@ -1,4 +1,13 @@
+@font-face {
+    font-family: "Jura";
+    src: url(../../fonts/Jura-Regular.ttf)
+}
+
 div.textBox {
     border: 1px black solid;
     background-color: rgba(0, 0, 0, 0.2);
+    font: 15px "Jura", sans-serif;
+    color: white;
+    text-shadow: 0 0 10px black;
+    padding: 1em;
 }
