@@ -6,7 +6,7 @@ export interface TextboxProps {
 }
 
 interface TextboxState {
-    text: string
+    text?: string
 }
 
 export default class Textbox extends React.Component<TextboxProps, TextboxState> {
@@ -15,7 +15,7 @@ export default class Textbox extends React.Component<TextboxProps, TextboxState>
         text: this.props.text || ''
     };
 
-    setText(text: string) {
+    public setText(text: string) {
         this.setState({text});
     }
 

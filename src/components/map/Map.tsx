@@ -3,9 +3,13 @@ import * as leaflet from 'leaflet';
 import * as sizeOf from 'image-size';
 import './Map.css';
 import '../../../node_modules/leaflet/dist/leaflet.css'
+import MapPoint from "./MapPoint";
+
+const markerIcon = require('../../images/ttv.svg');
 
 export interface MapProps {
-  imageUrl: string
+  imageUrl: string,
+  mapPoints?: MapPoint[]
 }
 
 export default class Map extends React.Component<MapProps> {
@@ -13,10 +17,18 @@ export default class Map extends React.Component<MapProps> {
   private readonly imgDimensions: Promise<void>;
   private imgHeight: number;
   private imgWidth: number;
+  private mapPoints: MapPoint[];
+  private icon: leaflet.Icon;
 
   constructor(props: Readonly<MapProps>) {
     super(props);
     this.imgDimensions = this.getImageDimensions(props.imageUrl);
+    this.mapPoints = props.mapPoints || [];
+    this.icon = leaflet.icon({
+      iconUrl: markerIcon,
+      iconSize: [50, 50],
+      iconAnchor: [25, 25] //half iconSize
+    });
   }
 
   private getImageDimensions(path: string): Promise<void> {
@@ -46,6 +58,18 @@ export default class Map extends React.Component<MapProps> {
       const image = leaflet.imageOverlay(this.props.imageUrl, bounds).addTo(map);
       map.fitBounds(bounds);
       map.setMaxZoom(Math.log2(ratio));
+
+      this.mapPoints.map(mapPoint => {
+        const marker = leaflet.marker([mapPoint.y/ratio, mapPoint.x/ratio], {
+          icon: this.icon,
+          title: mapPoint.hoverText,
+          alt: mapPoint.hoverText
+        });
+        marker.on('click', mapPoint.onClick);
+        return marker;
+      }).forEach(marker => marker.addTo(map));
+
+
     }
 
   }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import "./MapPoint.css"
 
 export interface MapPointProps {
   x: number;
@@ -8,22 +7,17 @@ export interface MapPointProps {
   onClick: () => any;
 }
 
-export default class MapPoint extends React.Component<MapPointProps> {
+export default class MapPoint {
+
+  public x = 0;
+  public y = 0;
+  public hoverText = '';
+  public onClick: any;
+
   constructor(props: MapPointProps) {
-    super(props);
-  }
-
-  render() {
-    const style = {
-      left: this.props.x + '%',
-      top: this.props.y + '%'
-    }
-
-    return (
-      <label className="mapPoint" title={this.props.hovertext} style={style}>
-        <input type="radio" name="mapPoint" onClick={() => this.props.onClick()} />
-        <span className="checkmark" />
-      </label>
-    );
+    this.x = props.x;
+    this.y = props.y;
+    this.hoverText = props.hovertext;
+    this.onClick = props.onClick;
   }
 }
