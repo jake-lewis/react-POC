@@ -5,8 +5,13 @@
 
 .map {
   height: 100%;
+  border: 1px black solid;
 }
 
 #map.leaflet-container {
-  background-color: black !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+#map img.leaflet-image-layer {
+  filter: drop-shadow(0 0 20px black);
 }

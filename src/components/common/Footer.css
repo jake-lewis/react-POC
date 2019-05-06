@@ -5,6 +5,7 @@ footer {
   position: fixed;
   bottom: 0;
   box-shadow: 0 0vh 20vh 0vh grey;
+  z-index:1000;
 }
 
 .circle {
