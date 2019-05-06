@@ -1,10 +1,20 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const { GenerateSW } = require('workbox-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest')
+const {GenerateSW} = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
-module.exports = function (env, argv) {
+/**
+ * Generates a webpack config Object
+ *
+ * @param {{NODE_ENV: string}} env
+ * @param argv
+ * @returns webpack config
+ */
+module.exports = function (env, argv)
+{
+    const NODE_ENV = env.NODE_ENV || 'production';
     const base = {
         entry: {
             home: './src/homeEntry.tsx',
@@ -39,7 +49,8 @@ module.exports = function (env, argv) {
                         {
                             loader: 'file-loader',
                             options: {
-                                outputPath: 'images'
+                                outputPath: 'images',
+                                name: '[name].[hash:8].[ext]'
                             }
                         }
 
@@ -51,7 +62,8 @@ module.exports = function (env, argv) {
                         {
                             loader: 'file-loader',
                             options: {
-                                outputPath: 'fonts'
+                                outputPath: 'fonts',
+                                name: '[name].[hash:8].[ext]'
                             }
                         }
 
@@ -67,8 +79,11 @@ module.exports = function (env, argv) {
             //     warning: true,
             //     errors: true
             // }
+            staticOptions: {
+                extensions: ['html']
+            }
         },
-        mode: 'development',
+        mode: NODE_ENV,
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -104,6 +119,7 @@ module.exports = function (env, argv) {
                 skipWaiting: true
             }),
             new WebpackPwaManifest({
+                filename: '[name].[hash:8].[ext]',
                 name: 'Project Shade',
                 short_name: 'Shade',
                 description: 'My awesome Progressive Web App!',
@@ -116,6 +132,10 @@ module.exports = function (env, argv) {
                         destination: 'icons'
                     }
                 ]
+            }),
+            new webpack.DefinePlugin({
+                "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
+                "process.env.PUBLIC_URL": JSON.stringify('')
             })
         ]
     };

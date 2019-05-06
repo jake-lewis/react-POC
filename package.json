@@ -29,8 +29,8 @@
     "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
-    "build": "rimraf ./dist && webpack",
-    "start": "webpack-dev-server --open"
+    "build": "rimraf ./dist && webpack --env.NODE_ENV=production",
+    "start": "webpack-dev-server --open --env.NODE_ENV=development"
   },
   "eslintConfig": {
     "extends": "react-app"
